@@ -1,0 +1,8 @@
+.SessionLabels {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  &.ui.label {
+    margin: 0 !important;
+  }
+}

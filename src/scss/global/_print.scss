@@ -1,0 +1,25 @@
+@media print {
+  @page {
+    size: auto;
+    margin: 0;
+  }
+  .ui.segment {
+    border: 0 !important;
+    box-shadow: 0 0 black !important;
+  }
+  .print {
+    display: inline !important;
+    align-self: center;
+  }
+  .noprint,
+  .ui.attached.menu {
+    display: none !important;
+  }
+  .only_print {
+    display: block !important;
+  }
+}
+
+.only_print {
+  display: none;
+}

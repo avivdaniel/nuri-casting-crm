@@ -1,0 +1,137 @@
+.App {
+  a.ui.green.button {
+    margin: 0 !important;
+  }
+
+  /* TABLES */
+  .ui.table tr {
+    color: black !important;
+
+    &.negative {
+      background: $red-negative !important;
+    }
+
+    &.positive {
+      background: $green-positive !important;
+    }
+
+    &.warning {
+      background: $yellow-warning !important;
+    }
+
+    &.bg-blue {
+      background: $light-blue !important;
+    }
+  }
+
+  .ui.definition.table {
+    th:first-child {
+      pointer-events: auto !important;
+    }
+
+    thead:not(.full-width) th:nth-child(2),
+    td:nth-child(2) {
+      border-inline-start: 1px solid rgba(34, 36, 38, .15) !important;
+      border-left: none !important;
+    }
+  }
+
+  /* MESSAGES */
+  .ui.icon.message > .icon:not(.close) {
+    margin-right: unset !important;
+    margin-left: .6em !important;
+  }
+
+  .ui.message .list:not(.ui) {
+    text-align: right !important;
+  }
+
+  .ui.info.message {
+    .content {
+      padding-right: 1rem !important;
+    }
+  }
+
+  /* LABELS */
+  .ui.label {
+    margin-left: 0 !important;
+    margin-right: 1rem !important;
+  }
+
+  .ui.image.label img {
+    margin: -.5833em -.5em -.5833em .5em !important;
+  }
+
+  // Reset label for segments rtl psudo elements
+  .ui.placeholder .header:not(:first-child):before {
+    display: none !important;
+  }
+
+  /* ICONS */
+  i.icon.check.circle.outline {
+    margin: 0 0 0 10px !important;
+  }
+
+  i.dropdown.icon {
+    margin-right: 0.5em !important;
+  }
+
+  .icon-right {
+    i.icon {
+      padding-left: 1rem !important;
+    }
+  }
+
+  /* CONFIRM MODAL */
+  .ui.modal {
+    text-align: right !important;
+  }
+}
+
+/* DIVIDERS */
+.ui.vertical.divider {
+  &:after, &:before {
+    height: 100% !important;
+  }
+}
+
+/* INPUTS - DROPDOWN - RTL SUPPORT */
+.ui.selection.dropdown {
+  direction: rtl !important;
+  display: inline-flex !important;
+  padding: .78571429em 1em .78571429em 2.1em !important;
+
+  .icon {
+    float: left !important;
+    left: 1em !important;
+    right: auto !important;
+    margin-left: auto;
+  }
+
+  .menu {
+    right: 0 !important;
+    left: auto !important;
+  }
+
+  .item {
+    text-align: right !important;
+  }
+
+  .divider.text {
+    text-align: right !important;
+  }
+
+  &.selection.dropdown {
+    .text {
+      text-align: right !important;
+    }
+  }
+}
+
+/* MENU - RTL SUPPORT */
+.menu.transition.visible {
+  .item {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+  }
+}

@@ -1,0 +1,28 @@
+.Calendar {
+  .quick-info-header-content {
+    padding: 8px;
+    .custom-link {
+      all: unset;
+      color: white;
+      font-size: 1.5rem;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .template-wrap {
+    .subject {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .checkMarkButton {
+      margin-inline-end: 0.5rem;
+    }
+  }
+
+  td.e-agenda-cells {
+    padding: 10px 0;
+  }
+}

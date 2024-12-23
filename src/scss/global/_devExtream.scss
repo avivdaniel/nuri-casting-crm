@@ -1,0 +1,22 @@
+/* DATA GRID */
+.dx-datagrid-headers.dx-datagrid-nowrap,
+.dx-gridbase-container > .dx-datagrid-rowsview.dx-scrollable {
+  visibility: hidden;
+  height: 1px;
+  width: 1px;
+}
+
+/* TOOLTIP */
+.dx-tooltip {
+  white-space: normal;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+/* FILE UPLOADER */
+.dx-fileuploader-container {
+  //Hide upload buttons for useButton type
+  .dx-fileuploader-upload-button, {
+    display: none;
+  }
+}

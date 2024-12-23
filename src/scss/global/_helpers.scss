@@ -1,0 +1,41 @@
+.selected-field {
+  background: lightcoral;
+}
+.text-right {
+  text-align: right;
+}
+.image-prev {
+  float: left;
+  width: 30vw;
+  height: 30vh;
+  object-fit: scale-down;
+}
+.inline {
+  display: inline !important;
+}
+.ellipsis-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &.one-line {
+    -webkit-line-clamp: 1;
+  }
+  &.four-lines {
+    -webkit-line-clamp: 4;
+  }
+}
+.warning {
+  .list {
+    text-align: right !important;
+    .content {
+      list-style-type: circle !important;
+    }
+  }
+}
+.text-black {
+  color: $black;
+}
+.segment-grey {
+  background: $light-grey !important;
+}
