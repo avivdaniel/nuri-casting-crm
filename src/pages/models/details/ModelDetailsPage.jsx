@@ -7,7 +7,7 @@ import { MODEL_DETAILS_TABS } from "./tabs";
 
 const ModelDetailsPage = ({ match }) => {
   const { api, model, setModel, loadingModel } = useModelDetailsContext();
-  const modelId = match.params.id;
+  const modelId = match?.params?.id;
 
   useEffect(() => {
     api.getModel(modelId);
