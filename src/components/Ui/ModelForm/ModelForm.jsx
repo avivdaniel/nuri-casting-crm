@@ -6,9 +6,10 @@ import {useModelDetailsContext} from "@/context/ModelDetailsContext";
 import {extractBankProperties, nestBankProperties} from "@/services/banks";
 import {COLLECTIONS} from "@/constants/collections";
 import ModelFormFields from "./ModelFormFields";
-import {route as CreateModelRoute} from '@/pages/models/create/route.jsx'
 import {modelFormDefaultValues} from "@/constants/createModelFormDefaultValues";
+import {route as CreateModelRoute} from '@/pages/models/create/route.jsx'
 import {route as DetailsModelRoute} from '@/pages/models/details/route.jsx'
+import {route as AdminHomeRoute} from "@/pages/home-admin/route.jsx";
 
 
 const ModelForm = () => {
@@ -17,7 +18,7 @@ const ModelForm = () => {
     const location = useLocation();
     const history = useHistory();
     const [isLoading, setLoading] = useState(false);
-    const [backLink, setBackLink] = useState("/admin");
+    const [backLink, setBackLink] = useState(AdminHomeRoute.path);
     const id = model?.id || idParam;
 
     const methods = useForm(modelFormDefaultValues);

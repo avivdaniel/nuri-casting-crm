@@ -4,13 +4,14 @@ import ModelSizesTable from "./ModelSizesTable";
 import { useModelDetailsContext } from "@/context/ModelDetailsContext.jsx";
 import ModelDetailsCard from "./ModelDetailsCard";
 import { MODEL_DETAILS_TABS } from "./tabs";
+import {useParams} from "react-router-dom";
 
-const ModelDetailsPage = ({ match }) => {
+const ModelDetailsPage = () => {
   const { api, model, setModel, loadingModel } = useModelDetailsContext();
-  const modelId = match?.params?.id;
+  const {id: modelId} = useParams();
 
   useEffect(() => {
-    api.getModel(modelId);
+    modelId && api.getModel(modelId);
     return () => setModel(null);
   }, [modelId]);
 
