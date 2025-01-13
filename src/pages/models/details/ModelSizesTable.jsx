@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Divider, Header, Segment, Table, TableRow } from "semantic-ui-react";
 import { useModelDetailsContext } from "../../../context/ModelDetailsContext.jsx";
-import { AGENCYS_TRANSLATIONS } from "../../../components/Ui/ModelForm/constants.jsx";
+import { AGENCYS_TRANSLATIONS } from "@/ui/components/ModelForm/constants.jsx";
 import { EMPLOYMENT_STATUS } from "./EmploymentStatus/consts.jsx";
 
 const ModelSizesTable = () => {

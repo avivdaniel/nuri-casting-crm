@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Container, Grid,} from "semantic-ui-react";
-import {useConfirm} from "../../../../components/hooks/useConfirm.jsx";
+import {useConfirm} from "@/ui/hooks/useConfirm.jsx";
 import {addDoc, getDocs, mapAsync} from "../../../../services/index.jsx";
 import {AddModelSessionAlertDialog} from "../AddModelSessionAlertDialog/AddModelSessionAlertDialog.jsx";
 import {COLLECTIONS} from "../../../../constants/collections.jsx";

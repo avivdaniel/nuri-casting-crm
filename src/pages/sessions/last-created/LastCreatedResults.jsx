@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Header, Message, Segment, Table} from "semantic-ui-react";
 import Session from "@/pages/sessions/search/Session.jsx";
-import Model from "../../../components/Ui/SearchModels/Model/Model.jsx";
+import Model from "@/ui/components/SearchModels/Model/Model.jsx";
 
 const COLUMNS = {
     sessions: ['הפקה', 'תאריך'],

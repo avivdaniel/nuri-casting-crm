@@ -1,5 +1,5 @@
-import { AGENCYS_NAMES } from "../../../../components/Ui/ModelForm/constants.jsx";
-import { formatTransportation } from "../../../../utils.jsx";
+import { AGENCYS_NAMES } from "@/ui/components/ModelForm/constants.jsx";
+import { formatTransportation } from "../../../../utils/index.jsx";
 
 export const calcModelSessionDetails = (modelSessions) => {
   // Define mapping for transportation types

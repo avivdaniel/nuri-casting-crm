@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Label } from "semantic-ui-react";
 import { useModelDetailsContext } from "../../../context/ModelDetailsContext.jsx";
 import ModelSessionTable from "./ModelSessionTable.jsx";
-import ModelForm from "../../../components/Ui/ModelForm/ModelForm.jsx";
+import ModelForm from "@/ui/components/ModelForm/ModelForm.jsx";
 import ModelNotes from "./ModelNotes.jsx";
 import { Documents } from "./Documents.jsx";
 import { Commission } from "./Commission.jsx";

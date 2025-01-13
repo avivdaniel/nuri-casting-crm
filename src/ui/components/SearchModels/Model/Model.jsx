@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Table, Icon } from "semantic-ui-react";
-import { updateDoc } from "../../../../services";
-import { COLLECTIONS } from "../../../../constants/collections";
 
 const Model = ({
   model,

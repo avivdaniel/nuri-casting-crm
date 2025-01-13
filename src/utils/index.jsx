@@ -38,18 +38,6 @@ export const calculateCommission = (commission, payment) => {
     return payment - ((commission/ 100) * payment).toFixed(2);
 }
 
-export const isNet60 = (sessionDate) => {
-    let today = new Date();
-    today.setMonth(today.getMonth() - 3);
-    let threeMAgoInMs = dayjs(today).valueOf();
-    let sessionTimeInMs = dayjs(sessionDate.toDate()).valueOf();
-    if (!sessionDate) return;
-    if (sessionTimeInMs > threeMAgoInMs) {
-        return false;
-    };
-    return true;
-}
-
 export const formatDisplayDate = (date) => dayjs(date).format("DD/MM/YYYY");
 
 export const formatBirthdayToUnix = (birthday) => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Select from "react-select";
 import {Label} from "semantic-ui-react";
 import {useController} from "react-hook-form";
-import {colourStyles} from "./selectInputStyles";
+import {colourStyles} from "./utils.jsx";
 
 
 export const CustomSelectWithDots = ({label = '', name, control, options, defaultValue, error, rules, ...rest}) => {

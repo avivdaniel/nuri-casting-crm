@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import {Header, Image, Segment} from "semantic-ui-react";
-import {cardIcons, iconsNames} from "./CardGroups/consts";
+import {cardIcons, iconsNames} from "../CardGroups/consts.jsx";
 
 export const PageHero = ({header, icon = iconsNames.add_model, labels, date = null, children, loading = false}) => {
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, Form, Modal} from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
-import useDuplicateSession from "../../../../components/hooks/useDuplicateSession.jsx";
+import useDuplicateSession from "@/ui/hooks/useDuplicateSession.jsx";
 
 const DuplicateSessionModal = ({originalSession}) => {
     const {isOpen, isLoading, openModal, closeModal, setDate, onSubmit, date} = useDuplicateSession({originalSession});

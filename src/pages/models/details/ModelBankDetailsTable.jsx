@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useModelDetailsContext } from "../../../context/ModelDetailsContext.jsx";
 import { Message, Segment, Table, TableRow } from "semantic-ui-react";
-import { BANKS_OPTIONS } from "../../../components/Ui/ModelForm/constants.jsx";
+import { BANKS_OPTIONS } from "@/ui/components/ModelForm/constants.jsx";
 
 export const ModelBankDetailsTable = () => {
   const { model } = useModelDetailsContext();

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useController} from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
-import {addErrorStylesToSelectInput} from '../selectInputStylesHelpers';
+import {addErrorStylesToSelectInput} from '../utils.jsx';
 import {Label} from "semantic-ui-react";
 
 export const CustomCreatableSelect = ({label = '', name, control, options, defaultValue, error, rules, ...rest}) => {

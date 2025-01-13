@@ -17,13 +17,13 @@ import {
 } from "semantic-ui-react";
 import { deleteDoc, mapAsync, updateModelSession } from "../../../../services/index.jsx";
 import ModelSession from "../ModelSession/ModelSession.jsx";
-import SessionLabel from "../../../../components/Ui/SessionLabels/SessionLabel.jsx";
-import { useSelectTableRows } from "../../../../components/hooks/useSelectTableRows.jsx";
+import SessionLabel from "@/ui/components/SessionLabels/SessionLabel.jsx";
+import { useSelectTableRows } from "@/ui/hooks/useSelectTableRows.jsx";
 import { EditModelSession } from "@/pages/models/details/EditModelSession.jsx";
-import { useExportExcel } from "../../../../components/hooks/useExportExcel.jsx";
+import { useExportExcel } from "@/ui/hooks/useExportExcel.jsx";
 import ExportToWord from "../ExportToWord/ExportToWord.jsx";
 import { calcModelSessionDetails } from "./utils.jsx";
-import { AGENCYS_NAMES } from "../../../../components/Ui/ModelForm/constants.jsx";
+import { AGENCYS_NAMES } from "@/ui/components/ModelForm/constants.jsx";
 import { COLLECTIONS } from "../../../../constants/collections.jsx";
 
 import "./ModelSessions.scss";

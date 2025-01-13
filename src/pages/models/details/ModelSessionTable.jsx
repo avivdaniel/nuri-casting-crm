@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import {deleteDoc, getModelSessionsForModel, mapAsync, updateModelSession} from "../../../services/index.jsx";
 import ModelSessionTableData from "./ModelSessionTableData.jsx";
 import {useModelDetailsContext} from "../../../context/ModelDetailsContext.jsx";
-import {useSelectTableRows} from "../../../components/hooks/useSelectTableRows.jsx";
+import {useSelectTableRows} from "@/ui/hooks/useSelectTableRows.jsx";
 import {EditModelSession} from "./EditModelSession.jsx";
 
 const ModelSessionTable = () => {

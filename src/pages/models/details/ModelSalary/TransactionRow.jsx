@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Icon, Table, TableRow, Modal, Header} from "semantic-ui-react";
-import {formatDisplayDate} from "../../../../utils.jsx";
+import {formatDisplayDate} from "../../../../utils/index.jsx";
 import {ModelTransactionForm} from "./ModelTransactionForm.jsx";
 
 

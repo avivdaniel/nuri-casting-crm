@@ -3,7 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import {registerLocale} from "react-datepicker";
 import {auth} from "./firebase";
 import Login from "./pages/login/Login";
-import {AppLoader, Navbar} from "./components/Ui";
+import {AppLoader, Navbar} from "@/ui/components";
 import {ToastContextProvider} from "./context/ToastContext";
 import {ModelDetailsContextProvider} from "./context/ModelDetailsContext.jsx";
 import PagesRouter from "./pages/PagesRouter.jsx";

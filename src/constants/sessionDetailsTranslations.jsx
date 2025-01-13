@@ -1,4 +1,4 @@
-import { AGENCYS_TRANSLATIONS } from "../components/Ui/ModelForm/constants";
+import { AGENCYS_TRANSLATIONS } from "@/ui/components/ModelForm/constants";
 
 export const sessionDetailsTranslations = {
   without: "ללא",

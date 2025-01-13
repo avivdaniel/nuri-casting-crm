@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card } from 'semantic-ui-react';
-import { TaskCard } from '../../../../components/Ui/TaskCard/TaskCard.jsx';
+import { TaskCard } from '@/ui/components/TaskCard/TaskCard.jsx';
 
 const TasksGrid = ({ tasks }) => {
     return (

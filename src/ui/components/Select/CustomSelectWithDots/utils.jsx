@@ -1,4 +1,4 @@
-import {addErrorStylesToSelectInput} from "../selectInputStylesHelpers";
+import {addErrorStylesToSelectInput} from "../utils.jsx";
 
 const dot = (color = 'transparent') => ({
     alignItems: 'center',

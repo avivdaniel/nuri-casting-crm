@@ -1,7 +1,7 @@
 import {Button, Dropdown, Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {signOut} from "firebase/auth";
-import {auth} from "../../firebase";
+import {auth} from "@/firebase/index.jsx";
 
 import {route as HomeTasksRoute} from '@/pages/tasks/home/route.jsx'
 import {route as CalendarRoute} from '@/pages/calendar/route.jsx'

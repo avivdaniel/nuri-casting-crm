@@ -13,9 +13,9 @@ import {
   TextRun,
   WidthType,
 } from "docx";
-import { formatTransportation } from "../../../../utils.jsx";
+import { formatTransportation } from "../../../../utils/index.jsx";
 import { Dropdown } from "semantic-ui-react";
-import { AGENCYS_NAMES } from "../../../../components/Ui/ModelForm/constants.jsx";
+import { AGENCYS_NAMES } from "@/ui/components/ModelForm/constants.jsx";
 import { sessionDetailsTranslations } from "../../../../constants/sessionDetailsTranslations.jsx";
 
 const ExportToWord = ({

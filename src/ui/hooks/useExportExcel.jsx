@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import dayjs from "dayjs";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
-import { formatTransportation } from "../../utils";
+import { formatTransportation } from "../../utils/index.jsx";
 
 export const useExportExcel = ({
   data = [],

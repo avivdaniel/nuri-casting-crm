@@ -1,4 +1,4 @@
-import {CardGroups} from "../../components/Ui/CardGroups/CardGroups.jsx";
+import {CardGroups} from "@/ui/components/CardGroups/CardGroups.jsx";
 
 export const items = [
     {

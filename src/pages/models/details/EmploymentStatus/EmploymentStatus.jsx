@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Controller, useForm} from "react-hook-form";
 import {Button, Form} from "semantic-ui-react";
-import {CustomSelect} from "../../../../components/Ui/Select/index.jsx";
+import {CustomSelect} from "@/ui/components/Select/index.jsx";
 import {useModelDetailsContext} from "../../../../context/ModelDetailsContext.jsx";
 import {EMPLOYMENT_STATUS_VALUES, EMPLOYMENT_STATUS} from "./consts.jsx";
 

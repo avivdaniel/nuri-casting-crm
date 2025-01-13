@@ -2,13 +2,13 @@ import React, {useState, useEffect} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {Button, Message, Tab} from "semantic-ui-react";
 import ModelSessions from "../ModelSessions/ModelSessions.jsx";
-import {PageHero, PageLoader} from "@/components/Ui/index.jsx";
+import {PageHero, PageLoader} from "@/ui/components/index.jsx";
 import {deleteDoc, getDoc, getModelSessionsForSession} from "@/services/index.jsx";
 import {AddModelSession} from "../AddModelSession/AddModelSession.jsx";
-import SessionForm from "@/components/Ui/SessionForm/SessionForm.jsx";
+import SessionForm from "@/ui/components/SessionForm/SessionForm.jsx";
 import DuplicateSessionModal from "../DuplicateSessionModal/DuplicateSessionModal.jsx";
 import {COLLECTIONS} from "@/constants/collections.jsx";
-import {iconsNames} from "@/components/Ui/CardGroups/consts.jsx";
+import {iconsNames} from "@/ui/components/CardGroups/consts.jsx";
 import SessionLabels from "../SessionLabels/SessionLabels.jsx";
 import './SessionDetailsPage.scss';
 

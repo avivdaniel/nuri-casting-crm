@@ -2,7 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 import {Link} from "react-router-dom";
 import {Checkbox, Icon, Label, Table} from "semantic-ui-react";
-import {calculateCommission} from "../../../utils.jsx";
+import {calculateCommission} from "../../../utils/index.jsx";
 
 const ModelSessionItem = ({
                               modelSession,

@@ -16,12 +16,12 @@ import {
 } from "semantic-ui-react";
 import Session from "./Session.jsx";
 import { deleteDoc, fetchSessions, getDocsWhereMultiple } from "../../../services/index.jsx";
-import { PageHero } from "../../../components/Ui/index.jsx";
-import { useExportSessionsToExcel } from "../../../components/hooks/useExportSessionsToExcel.jsx";
-import useStickyState from "../../../components/hooks/useStickyState.jsx";
+import { PageHero } from "@/ui/components/index.jsx";
+import { useExportSessionsToExcel } from "@/ui/hooks/useExportSessionsToExcel.jsx";
+import useStickyState from "@/ui/hooks/useStickyState.jsx";
 import { COLLECTIONS } from "../../../constants/collections.jsx";
-import { iconsNames } from "../../../components/Ui/CardGroups/consts.jsx";
-import { AGENCYS_NAMES } from "../../../components/Ui/ModelForm/constants.jsx";
+import { iconsNames } from "@/ui/components/CardGroups/consts.jsx";
+import { AGENCYS_NAMES } from "@/ui/components/ModelForm/constants.jsx";
 
 const SESSIONS_PER_PAGE = 10;
 

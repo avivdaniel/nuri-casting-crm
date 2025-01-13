@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {SalaryTable} from "./SalaryTable.jsx";
 import {Accordion, Loader} from "semantic-ui-react";
-import {formatDisplayDate} from "../../../../utils.jsx";
+import {formatDisplayDate} from "../../../../utils/index.jsx";
 import {useSalaryContext} from "./ModelSalary.jsx";
 
 export const SalaryTables = () => {

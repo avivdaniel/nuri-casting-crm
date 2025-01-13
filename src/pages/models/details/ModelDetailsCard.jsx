@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import modelAvatar from "../../../assets/images/model-avatar.png";
 import List from "semantic-ui-react/dist/commonjs/elements/List";
-import { formatGender } from "../../../utils.jsx";
+import { formatGender } from "../../../utils/index.jsx";
 import { useModelDetailsContext } from "../../../context/ModelDetailsContext.jsx";
 
 const ModelDetailsCard = () => {

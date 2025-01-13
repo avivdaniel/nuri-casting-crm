@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { useController } from "react-hook-form";
-import { addErrorStylesToSelectInput } from "../selectInputStylesHelpers";
+import { addErrorStylesToSelectInput } from "../utils.jsx";
 import { Label } from "semantic-ui-react";
 
 export const CustomSelect = ({

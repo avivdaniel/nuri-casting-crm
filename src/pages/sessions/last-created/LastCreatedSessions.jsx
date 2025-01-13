@@ -3,10 +3,10 @@ import Radio from "semantic-ui-react/dist/commonjs/addons/Radio";
 import {Button, Form, Segment} from "semantic-ui-react";
 
 import LastCreatedResults from "./LastCreatedResults.jsx";
-import useStickyState from "../../../components/hooks/useStickyState.jsx";
-import {PageHero} from "../../../components/Ui/index.jsx";
+import useStickyState from "@/ui/hooks/useStickyState.jsx";
+import {PageHero} from "@/ui/components/index.jsx";
 import {COLLECTIONS} from "../../../constants/collections.jsx";
-import {iconsNames} from "../../../components/Ui/CardGroups/consts.jsx";
+import {iconsNames} from "@/ui/components/CardGroups/consts.jsx";
 import {getCollectionByDateRange} from "../../../services/getCollection.jsx";
 
 const searchCollectionsParameters = {

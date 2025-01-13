@@ -13,8 +13,8 @@ import {
 import {useHistory} from "react-router-dom";
 import {registerLicense} from '@syncfusion/ej2-base';
 import {useCalendarTemplates} from "./useCalendarTemplates.jsx";
-import {PageHero} from "../../components/Ui/index.jsx";
-import {iconsNames} from "../../components/Ui/CardGroups/consts.jsx";
+import {PageHero} from "@/ui/components/index.jsx";
+import {iconsNames} from "@/ui/components/CardGroups/consts.jsx";
 import {dataManager} from "./dataManager.jsx";
 
 import {L10n} from '@syncfusion/ej2-base';

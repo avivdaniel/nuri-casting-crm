@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Dimmer, Loader} from "semantic-ui-react";
 import {useHistory, useParams} from "react-router-dom";
 import {formatTaskForStorage, getDoc, putTaskDocumentOnStorage, updateDoc} from "../../../services/index.jsx";
-import {iconsNames} from "../../../components/Ui/CardGroups/consts.jsx";
-import {PageHero} from "../../../components/Ui/index.jsx";
+import {iconsNames} from "@/ui/components/CardGroups/consts.jsx";
+import {PageHero} from "@/ui/components/index.jsx";
 import {TaskForm} from "@/pages/tasks/home/TaskForm/TaskForm.jsx";
 import {COLLECTIONS} from "../../../constants/collections.jsx";
 

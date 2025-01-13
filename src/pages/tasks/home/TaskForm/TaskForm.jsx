@@ -3,8 +3,8 @@ import {Button, Form, FormField, FormGroup, FormInput, Segment, TextArea} from "
 import {Link} from "react-router-dom";
 import {Controller, useForm} from "react-hook-form";
 import FileUploader from 'devextreme-react/file-uploader';
-import {CustomSelect, CustomSelectWithDots} from "@/components/Ui/Select/index.jsx";
-import {CustomDatePicker} from "@/components/Ui/CustomDatePicker/CustomDatePicker.jsx";
+import {CustomSelect, CustomSelectWithDots} from "@/ui/components/Select/index.jsx";
+import {CustomDatePicker} from "@/ui/components/CustomDatePicker/CustomDatePicker.jsx";
 import {CREATE_TASK_DEFAULT_VALUE, EMPLOYEES_VALUES, TASK_STATUS_VALUES} from "../consts.jsx";
 import {route as allTasksPath} from '../route.jsx'
 

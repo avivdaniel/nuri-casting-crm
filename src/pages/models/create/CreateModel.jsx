@@ -1,4 +1,4 @@
-import ModelForm from "@/components/Ui/ModelForm/ModelForm.jsx";
+import ModelForm from "@/ui/components/ModelForm/ModelForm.jsx";
 
 const CreateModel = () => {
     return <ModelForm/>

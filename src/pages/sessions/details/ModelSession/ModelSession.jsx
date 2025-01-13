@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Checkbox, Icon, Image, Label, Table } from "semantic-ui-react";
-import { formatTransportation } from "../../../../utils.jsx";
-import { AGENCYS_NAMES } from "../../../../components/Ui/ModelForm/constants.jsx";
+import { formatTransportation } from "../../../../utils/index.jsx";
+import { AGENCYS_NAMES } from "@/ui/components/ModelForm/constants.jsx";
 import "./ModelSession.scss";
 
 const ModelSession = ({

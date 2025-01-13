@@ -8,7 +8,7 @@ import {
     generateNewModelSession
 } from "@/pages/sessions/details/AddModelSession/AddModelSession.utils.jsx";
 import {useModelDetailsContext} from "../../../../context/ModelDetailsContext.jsx";
-import {useConfirm} from "../../../../components/hooks/useConfirm.jsx";
+import {useConfirm} from "@/ui/hooks/useConfirm.jsx";
 import {
     AddModelSessionAlertDialog
 } from "@/pages/sessions/details/AddModelSessionAlertDialog/AddModelSessionAlertDialog.jsx";
