@@ -27,17 +27,17 @@ import {route as CalendarRoute} from '@/pages/calendar/route.jsx';
 export const adminRoutes = [
     HomeRoute,
     // Models
+    SearchActiveModelsRoute,
     CreateModelRoute,
+    SearchArchiveModelsRoute,
     EditModelRoute,
     DetailsModelRoute,
-    SearchArchiveModelsRoute,
-    SearchActiveModelsRoute,
     //Sessions
-    SearchSessionRoute, // /sessions
-    CreateSessionRoute, // /sessions/create
-    LastCreatedSessionRoute, //sessions/last-created
-    EditSessionRoute, //sessions/:sessionsId/edit
-    DetailsSessionRoute, // sessions/:id
+    SearchSessionRoute,
+    CreateSessionRoute,
+    LastCreatedSessionRoute,
+    EditSessionRoute,
+    DetailsSessionRoute,
     //Tasks
     CreateTaskRoute,
     EditTaskRoute,
