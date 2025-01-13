@@ -15,7 +15,7 @@ import {
 import {TaskDetailsTable} from "./TaskDetailsTable/TaskDetailsTable.jsx";
 import {deleteDoc, deleteTaskDocument, getDoc, getDocSubCollection} from "../../../services/index.jsx";
 import {COLLECTIONS} from "../../../constants/collections.jsx";
-import {path as allTasksPath} from '@/pages/tasks/home/route.jsx';
+import {route as allTasksPath} from '@/pages/tasks/home/route.jsx';
 
 const DetailsTask = () => {
     const {id: taskId} = useParams();
@@ -55,7 +55,7 @@ const DetailsTask = () => {
             alert(e)
         } finally {
             setLoading(false);
-            history.push(allTasksPath)
+            history.push(allTasksPath.path)
         }
     };
 

@@ -39,10 +39,10 @@ export const adminRoutes = [
     EditSessionRoute,
     DetailsSessionRoute,
     //Tasks
+    HomeTasksRoute,
     CreateTaskRoute,
     EditTaskRoute,
     DetailsTaskRoute,
-    HomeTasksRoute,
     // Other
     CalendarRoute,
 ];
