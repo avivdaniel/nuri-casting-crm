@@ -16,7 +16,7 @@ const SessionForm = ({sessionId, updateSession}) => {
     const [isExternalProduction, setIsExternalProduction] = useState(false);
     const [note, setNote] = useState("")
 
-    const {sessionId: sessionParamId} = useParams();
+    const {id: sessionParamId} = useParams();
     const [backLink, setBackLink] = useState("/admin");
     const id = sessionId || sessionParamId;
     const history = useHistory();

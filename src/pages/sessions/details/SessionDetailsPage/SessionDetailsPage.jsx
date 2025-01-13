@@ -1,22 +1,24 @@
 import React, {useState, useEffect} from "react";
+import {useHistory, useParams} from "react-router-dom";
 import {Button, Message, Tab} from "semantic-ui-react";
 import ModelSessions from "../ModelSessions/ModelSessions.jsx";
-import {PageHero, PageLoader} from "../../../../components/Ui/index.jsx";
-import {deleteDoc, getDoc, getModelSessionsForSession} from "../../../../services/index.jsx";
+import {PageHero, PageLoader} from "@/components/Ui/index.jsx";
+import {deleteDoc, getDoc, getModelSessionsForSession} from "@/services/index.jsx";
 import {AddModelSession} from "../AddModelSession/AddModelSession.jsx";
-import SessionForm from "../../../../components/Ui/SessionForm/SessionForm.jsx";
+import SessionForm from "@/components/Ui/SessionForm/SessionForm.jsx";
 import DuplicateSessionModal from "../DuplicateSessionModal/DuplicateSessionModal.jsx";
-import {COLLECTIONS} from "../../../../constants/collections.jsx";
-import {iconsNames} from "../../../../components/Ui/CardGroups/consts.jsx";
+import {COLLECTIONS} from "@/constants/collections.jsx";
+import {iconsNames} from "@/components/Ui/CardGroups/consts.jsx";
 import SessionLabels from "../SessionLabels/SessionLabels.jsx";
 import './SessionDetailsPage.scss';
 
-const SessionDetailsPage = ({history, match}) => {
+const SessionDetailsPage = () => {
+    const history = useHistory();
+    const { id: sessionId, tab: initialTab } = useParams();
     const [session, setSession] = useState(null);
     const [modelSessions, setModelSessions] = useState([]);
     const [isLoading, setLoading] = useState(true);
-    const sessionId = match?.params?.id;
-    const [tab, setTab] = useState(match.params.tab);
+    const [tab, setTab] = useState(initialTab);
 
     const getSession = async () => {
         if (!sessionId) return;
@@ -79,7 +81,7 @@ const SessionDetailsPage = ({history, match}) => {
     ];
 
     useEffect(() => {
-        setTab(match.params.tab);
+        setTab(initialTab);
         (async () => {
             setLoading(true)
             try {
@@ -92,7 +94,7 @@ const SessionDetailsPage = ({history, match}) => {
                 setLoading(false)
             }
         })();
-    }, [sessionId, match.params.tab]);
+    }, [sessionId, initialTab]);
 
     return (
         <>

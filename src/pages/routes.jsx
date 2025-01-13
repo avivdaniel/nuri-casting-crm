@@ -33,11 +33,11 @@ export const adminRoutes = [
     SearchArchiveModelsRoute,
     SearchActiveModelsRoute,
     //Sessions
-    DetailsSessionRoute,
-    CreateSessionRoute,
-    EditSessionRoute,
-    SearchSessionRoute,
-    LastCreatedSessionRoute,
+    SearchSessionRoute, // /sessions
+    CreateSessionRoute, // /sessions/create
+    LastCreatedSessionRoute, //sessions/last-created
+    EditSessionRoute, //sessions/:sessionsId/edit
+    DetailsSessionRoute, // sessions/:id
     //Tasks
     CreateTaskRoute,
     EditTaskRoute,
