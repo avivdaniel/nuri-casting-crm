@@ -1,8 +1,9 @@
 import {CardGroups} from "@/ui/components/CardGroups/CardGroups.jsx";
+import {route as PublicCreateModelRoute} from '@/pages/public/create-models/route.jsx';
 
 export const items = [
     {
-        link: '/public/create-model',
+        link: PublicCreateModelRoute.path,
         text: 'צור מיוצג חדש',
         image: {
             icon: 'add_model',

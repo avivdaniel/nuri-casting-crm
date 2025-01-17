@@ -2,10 +2,10 @@ import {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {useForm, FormProvider} from "react-hook-form";
 import {ThanksModal} from "./ThanksModal";
-import ModelFormFields from "../../components/Ui/ModelForm/ModelFormFields";
-import {addDoc, nestBankProperties} from "../../services";
-import {COLLECTIONS} from "../../constants/collections";
-import {modelFormDefaultValues} from "../../constants/createModelFormDefaultValues";
+import ModelFormFields from "@/ui/components/ModelForm/ModelFormFields.jsx";
+import {addDoc, nestBankProperties} from "@/services";
+import {COLLECTIONS} from "@/constants/collections.jsx";
+import {modelFormDefaultValues} from "@/constants/createModelFormDefaultValues.jsx";
 
 export default () => {
     const history = useHistory();
