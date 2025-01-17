@@ -12,7 +12,7 @@ import {route as CreateSessionRoute} from '@/pages/sessions/create/route.jsx'
 import {route as SearchSessionRoute} from '@/pages/sessions/search/route.jsx'
 
 
-export const Navbar = ({user}) => {
+export const Navbar = ({user, exportModels}) => {
     return (
         <Menu className="noprint" color="blue" inverted pointing>
             {user ? (
@@ -49,6 +49,12 @@ export const Navbar = ({user}) => {
                                 style={{textAlign: "center"}}
                             >
                                 חפש מיוצגים בארכיון
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={exportModels}
+                                style={{textAlign: "center"}}
+                            >
+                                ייצוא כל המיוצגים
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>

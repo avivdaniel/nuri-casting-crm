@@ -32,6 +32,7 @@ export const useConfirm = () => {
             }
         };
     }, [confirm, needsCleanup]);
+
     return {
         ...confirm,
         isConfirmed

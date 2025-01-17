@@ -1,5 +1,5 @@
-import {Button, Tab, TabPane} from "semantic-ui-react";
 import React, {useEffect, useState} from 'react';
+import {Button, Tab, TabPane} from "semantic-ui-react";
 import {PageHero} from "@/ui/components/index.jsx";
 import {iconsNames} from "@/ui/components/CardGroups/consts.jsx";
 import TasksGrid from "./TasksGrid/TasksGrid.jsx";

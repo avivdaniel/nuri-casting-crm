@@ -83,3 +83,16 @@ export const getDocsWhereMultiple = async (collectionName, conditions, orderByFi
         id: doc.id,
     }));
 };
+
+export const getEntireCollection = async (collectionName) => {
+
+    const q = query(
+        collection(db, collectionName),
+    );
+
+    const response = await getDocsFromDb(q);
+    return response.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+    }));
+};
