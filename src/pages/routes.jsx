@@ -46,3 +46,12 @@ export const adminRoutes = [
     // Other
     CalendarRoute,
 ];
+
+
+import {route as HomeGuestRoute} from '@/pages/home-guest/route.jsx';
+import {route as PublicCreateModelRoute} from '@/pages/public/create-models/route.jsx';
+
+export const guestRoutes = [
+    HomeGuestRoute,
+    PublicCreateModelRoute
+]

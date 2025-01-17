@@ -1,7 +1,8 @@
 import {useMemo} from "react";
 import {Route, Switch} from "react-router-dom";
-import {adminRoutes} from "./routes.jsx";
+import {adminRoutes, guestRoutes} from "./routes.jsx";
 import {route as homeAdminRoute} from "./home-admin/route.jsx";
+import {route as homeGuestRoute} from "./home-guest/route.jsx";
 import {Container} from "semantic-ui-react";
 
 const renderRoutes = (routes) => {
@@ -13,7 +14,8 @@ const renderRoutes = (routes) => {
 };
 
 const PagesRouter = ({user}) => {
-    const adminRoutesComp = useMemo(()=> renderRoutes(adminRoutes),[user]);
+    const adminRoutesComp = useMemo(()=> renderRoutes(adminRoutes),[]);
+    const guestRoutesComp = useMemo(()=> renderRoutes(guestRoutes),[]);
 
     return (
         <Container>
@@ -24,7 +26,11 @@ const PagesRouter = ({user}) => {
                     </Switch>
                  </Route>
             ) : (
-                <Route path="/public"/>
+                <Route path={homeGuestRoute.path}>
+                    <Switch>
+                        {guestRoutesComp}
+                    </Switch>
+                </Route>
             )}
         </Container>
     );
