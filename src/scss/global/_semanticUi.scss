@@ -5,7 +5,10 @@
 
   /* TABLES */
   .ui.table {
-    text-align: right !important;
+    &.documents-table {
+      text-align: right !important;
+    }
+
     tr {
       color: black !important;
 

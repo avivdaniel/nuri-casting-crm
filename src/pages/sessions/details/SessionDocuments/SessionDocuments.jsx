@@ -118,7 +118,7 @@ export const SessionDocuments = ({sessionId, updateSession}) => {
                 </Form.Group>
             </Form>
 
-            <Table celled striped>
+            <Table celled striped className='documents-table'>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>שם הקובץ</Table.HeaderCell>
