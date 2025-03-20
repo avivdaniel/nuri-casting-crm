@@ -4,23 +4,26 @@
   }
 
   /* TABLES */
-  .ui.table tr {
-    color: black !important;
+  .ui.table {
+    text-align: right !important;
+    tr {
+      color: black !important;
 
-    &.negative {
-      background: $red-negative !important;
-    }
-
-    &.positive {
-      background: $green-positive !important;
-    }
-
-    &.warning {
-      background: $yellow-warning !important;
-    }
-
-    &.bg-blue {
-      background: $light-blue !important;
+      &.negative {
+        background: $red-negative !important;
+      }
+  
+      &.positive {
+        background: $green-positive !important;
+      }
+  
+      &.warning {
+        background: $yellow-warning !important;
+      }
+  
+      &.bg-blue {
+        background: $light-blue !important;
+      }
     }
   }
 
