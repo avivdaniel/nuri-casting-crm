@@ -1,27 +1,32 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
-import {Form, Button, Segment, Input, Checkbox, TextArea} from "semantic-ui-react";
+import {Form, Button, Segment, Checkbox, TextArea} from "semantic-ui-react";
 import {PageHero} from "../index";
 import {updateDoc, addDoc, getDoc} from "../../../services";
 import {COLLECTIONS} from "../../../constants/collections";
 import {iconsNames} from "../CardGroups/consts";
+import {useForm, Controller} from "react-hook-form";
 
 const SessionForm = ({sessionId, updateSession}) => {
-    const [isLoading, setLoading] = useState(false);
-    const [date, setDate] = useState(new Date());
-    const [production, setProduction] = useState("");
-    const [paymentPerModel, setPaymentPerModel] = useState(0);
-    const [isPostponement, setIsPostponement] = useState(false);
-    const [isExternalProduction, setIsExternalProduction] = useState(false);
-    const [note, setNote] = useState("")
-
     const {id: sessionParamId} = useParams();
-    const [backLink, setBackLink] = useState("/admin");
     const id = sessionId || sessionParamId;
     const history = useHistory();
+    const [backLink, setBackLink] = React.useState("/admin");
+    const [isLoading, setLoading] = React.useState(false);
 
-    useEffect(() => {
+    const {handleSubmit, control, setValue, reset} = useForm({
+        defaultValues: {
+            date: new Date(),
+            production: "",
+            isPostponement: false,
+            isExternalProduction: false,
+            paymentPerModel: 0,
+            note: ""
+        }
+    });
+
+    React.useEffect(() => {
         if (!id) return;
         sessionId ?
             setBackLink(`admin/sessions/${sessionId}`)
@@ -31,62 +36,48 @@ const SessionForm = ({sessionId, updateSession}) => {
             setLoading(true);
             try {
                 const session = await getDoc(COLLECTIONS.sessions, id);
-                setDate(new Date(session.date.toDate()));
-                setProduction(session.production);
-                setIsPostponement(session?.isPostponement || false);
-                setIsExternalProduction(session?.isExternalProduction || false);
-                setPaymentPerModel(session?.paymentPerModel || 0)
-                setNote(session?.note || "")
+                reset({
+                    date: new Date(session.date.toDate()),
+                    production: session.production,
+                    isPostponement: session?.isPostponement || false,
+                    isExternalProduction: session?.isExternalProduction || false,
+                    paymentPerModel: session?.paymentPerModel || 0,
+                    note: session?.note || ""
+                });
             } catch (err) {
                 alert(err);
             }
             setLoading(false);
         };
         getSession();
-    }, [sessionId, id]);
+    }, [sessionId, id, reset]);
 
     const pageTitle = id ? "עדכן יום צילום" : "צור יום צילום חדש";
 
-    const submit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (formData) => {
         setLoading(true);
-        const updatedDocData = {
-            date,
-            production,
-            isPostponement,
-            isExternalProduction,
-            paymentPerModel,
-            note
-        }
-        //Update session
-        if (id) {
-            try {
-                await updateDoc(COLLECTIONS.sessions, id, updatedDocData);
+        try {
+            if (id) {
+                await updateDoc(COLLECTIONS.sessions, id, formData);
                 if (sessionId) {
                     updateSession((prev) => ({
                         ...prev,
-                        ...updatedDocData
+                        ...formData
                     }));
-                    setLoading(false);
                 } else {
                     history.push(`/admin/sessions/${id}`);
                 }
-            } catch (err) {
-                setLoading(false);
-                alert(err);
-            }
-            //Create new session
-        } else {
-            try {
+            } else {
                 const docRef = await addDoc(COLLECTIONS.sessions, {
-                    ...updatedDocData,
+                    ...formData,
                     createdDate: Date.now(),
                 });
                 history.push(`/admin/sessions/${docRef.id}`);
-            } catch (err) {
-                setLoading(false);
-                alert(err);
             }
+        } catch (err) {
+            alert(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -94,59 +85,97 @@ const SessionForm = ({sessionId, updateSession}) => {
         <>
             {!sessionId && <PageHero header={pageTitle} icon={iconsNames.add_session}/>}
             <Segment loading={isLoading}>
-                <Form onSubmit={submit}>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                     <Form.Group>
-                        {id &&
+                        {id && (
                             <Form.Field width={2}>
                                 <label>האם נדחה?</label>
-                                <Checkbox
-                                    toggle
-                                    onChange={(e, data) => setIsPostponement(data.checked)}
-                                    checked={isPostponement}
+                                <Controller
+                                    name="isPostponement"
+                                    control={control}
+                                    render={({field: {value, onChange}}) => (
+                                        <Checkbox
+                                            toggle
+                                            checked={value}
+                                            onChange={(e, data) => onChange(data.checked)}
+                                        />
+                                    )}
                                 />
                             </Form.Field>
-                        }
+                        )}
                         <Form.Field width={2}>
                             <label>הפקה חיצונית?</label>
-                            <Checkbox
-                                toggle
-                                onChange={(e, data) => setIsExternalProduction(data.checked)}
-                                checked={isExternalProduction}
+                            <Controller
+                                name="isExternalProduction"
+                                control={control}
+                                render={({field: {value, onChange}}) => (
+                                    <Checkbox
+                                        toggle
+                                        checked={value}
+                                        onChange={(e, data) => onChange(data.checked)}
+                                    />
+                                )}
                             />
                         </Form.Field>
                         <Form.Field width={7} required>
                             <label>שם ההפקה:</label>
-                            <Input
-                                value={production}
-                                onChange={(e) => setProduction(e.target.value.trimStart())}
-                                type="text"
-                                placeholder="הקלד שם הפקה ..."
+                            <Controller
+                                name="production"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({field}) => (
+                                    <Form.Input
+                                        {...field}
+                                        type="text"
+                                        placeholder="הקלד שם הפקה ..."
+                                        onChange={(e) => field.onChange(e.target.value.trimStart())}
+                                    />
+                                )}
                             />
                         </Form.Field>
                         <Form.Field width={4}>
                             <label>תשלום לכל מיוצג:</label>
-                            <Input
-                                value={paymentPerModel}
-                                onChange={(e) => setPaymentPerModel(Number(e.target.value))}
-                                type="number"
-                                placeholder="הקלד סכום תשלום ..."
+                            <Controller
+                                name="paymentPerModel"
+                                control={control}
+                                render={({field}) => (
+                                    <Form.Input
+                                        {...field}
+                                        type="number"
+                                        placeholder="הקלד סכום תשלום ..."
+                                        onChange={(e) => field.onChange(Number(e.target.value))}
+                                    />
+                                )}
                             />
                         </Form.Field>
                         <Form.Field width={7} required>
                             <label>תאריך:</label>
-                            <DatePicker
-                                selected={date}
-                                dateFormat="dd/MM/yyyy"
-                                onChange={(date) => setDate(date)}
+                            <Controller
+                                name="date"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({field: {value, onChange}}) => (
+                                    <DatePicker
+                                        selected={value}
+                                        dateFormat="dd/MM/yyyy"
+                                        onChange={onChange}
+                                    />
+                                )}
                             />
                         </Form.Field>
                     </Form.Group>
-                    {id &&
+                    {id && (
                         <Form.Field>
                             <label>הערה</label>
-                            <TextArea value={note} onChange={(e, {value}) => setNote(value)}/>
+                            <Controller
+                                name="note"
+                                control={control}
+                                render={({field}) => (
+                                    <TextArea {...field} />
+                                )}
+                            />
                         </Form.Field>
-                    }
+                    )}
                     <Button disabled={isLoading} loading={isLoading} color="green">
                         שמור
                     </Button>
