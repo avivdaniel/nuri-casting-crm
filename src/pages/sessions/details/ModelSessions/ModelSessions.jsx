@@ -15,7 +15,7 @@ import {
   Menu,
   Input,
 } from "semantic-ui-react";
-import { deleteDoc, mapAsync, updateModelSession } from "../../../../services/index.jsx";
+import { deleteDoc, mapAsync, updateModelSession } from "@/services/index.jsx";
 import ModelSession from "../ModelSession/ModelSession.jsx";
 import SessionLabel from "@/ui/components/SessionLabels/SessionLabel.jsx";
 import { useSelectTableRows } from "@/ui/hooks/useSelectTableRows.jsx";
@@ -24,7 +24,7 @@ import { useExportExcel } from "@/ui/hooks/useExportExcel.jsx";
 import ExportToWord from "../ExportToWord/ExportToWord.jsx";
 import { calcModelSessionDetails } from "./utils.jsx";
 import { AGENCYS_NAMES } from "@/ui/components/ModelForm/constants.jsx";
-import { COLLECTIONS } from "../../../../constants/collections.jsx";
+import { COLLECTIONS } from "@/constants/collections.jsx";
 
 import "./ModelSessions.scss";
 
@@ -40,11 +40,13 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
     ),
   );
   const [requestedModelSession, setRequestedModelSession] = useState(null);
+  const [sortBy, setSortBy] = useState('name');
+  const [sortDirection, setSortDirection] = useState('ascending');
 
   const { selectedRows, handleSelectRow, selectAllCheckboxProps } =
     useSelectTableRows({ rows: modelSessions });
 
-  const onlyActiveModelSessions = modelSessions.filter(
+  const modelSessionsWithoutFines = modelSessions.filter(
     (modelSession) => !modelSession.hasFine,
   );
 
@@ -52,13 +54,6 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
     (modelSession) =>
       modelSession.model.name.toLowerCase().includes(searchValue.toLowerCase()), // Filtering logic
   );
-
-  const { exportToExcel, isExporting } = useExportExcel({
-    session: session,
-    showModelId: toggleModelId,
-    showModelCity: toggleModelCity,
-    data: onlyActiveModelSessions,
-  });
 
   const sessionTitle = `${session.production} ${dayjs(session.date).format("DD/MM/YYYY")}`;
   const handleSetRequestedModelSession = (modelSession) => {
@@ -147,6 +142,38 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
     }
   };
 
+  const getSortedModelSessions = (data) => {
+    return [...data].sort((a, b) => {
+      if (sortBy === 'notes') {
+        const notesA = (a.notes || '').toLowerCase();
+        const notesB = (b.notes || '').toLowerCase();
+        return sortDirection === 'ascending' 
+          ? (notesA > notesB ? 1 : notesB > notesA ? -1 : 0)
+          : (notesA < notesB ? 1 : notesB < notesA ? -1 : 0);
+      }
+      return 0;
+    });
+  };
+
+  const sortedFilteredModelSessions = getSortedModelSessions(filteredModelSessions);
+  const sortedModelSessionsWithoutFines = getSortedModelSessions(modelSessionsWithoutFines);
+
+  const { exportToExcel, isExporting } = useExportExcel({
+    session: session,
+    showModelId: toggleModelId,
+    showModelCity: toggleModelCity,
+    data: sortedModelSessionsWithoutFines,
+  });
+  
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending');
+    } else {
+      setSortBy(column);
+      setSortDirection('ascending');
+    }
+  };
+
   return (
     <>
       <Segment
@@ -156,10 +183,10 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
       >
         <Header className="noprint">
           <Message
-            positive={!!onlyActiveModelSessions.length}
-            negative={!!onlyActiveModelSessions.length === 0}
+            positive={!!modelSessionsWithoutFines.length}
+            negative={!!modelSessionsWithoutFines.length === 0}
           >
-            {`${onlyActiveModelSessions.length} משתתפים ביום צילום זה:`}
+            {`${modelSessionsWithoutFines.length} משתתפים ביום צילום זה:`}
           </Message>
         </Header>
         <h1 className="only_print">{sessionTitle}</h1>
@@ -181,7 +208,7 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
                 onClick={() => window.print()}
               />
               <ExportToWord
-                data={onlyActiveModelSessions}
+                data={sortedModelSessionsWithoutFines}
                 sessionTitle={sessionTitle}
                 detailsCounter={Object.fromEntries(
                   Object.entries(detailsCounter),
@@ -258,12 +285,15 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
                 />
               </Table.HeaderCell>
               <Table.HeaderCell>דרך הגעה</Table.HeaderCell>
-              <Table.HeaderCell>הערה</Table.HeaderCell>
+              <Table.HeaderCell onClick={() => handleSort('notes')} 
+                                sorted={sortBy === 'notes' ? sortDirection : null}>
+                הערה
+              </Table.HeaderCell>
               <Table.HeaderCell className="noprint">פעולות</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {filteredModelSessions.map((modelSession, index) => {
+            {sortedFilteredModelSessions.map((modelSession, index) => {
               return (
                 <ModelSession
                   key={index}
