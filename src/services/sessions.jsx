@@ -1,5 +1,6 @@
 import {getDocsWhereMultiple} from "./getDocs";
 import {COLLECTIONS} from "../constants/collections";
+import {putDocumentOnStorage, deleteDocument} from "./documents";
 
 export const fetchSessions = async (query, limit) => {
     const start = query;
@@ -26,3 +27,11 @@ export const fetchSessions = async (query, limit) => {
         alert(e)
     }
 }
+
+export const putSessionDocumentOnStorage = (sessionId, document) => {
+    return putDocumentOnStorage(COLLECTIONS.sessions, sessionId, document);
+};
+
+export const deleteSessionDocument = (sessionId, document) => {
+    return deleteDocument(COLLECTIONS.sessions, sessionId, document);
+};
