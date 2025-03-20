@@ -10,6 +10,7 @@ import DuplicateSessionModal from "../DuplicateSessionModal/DuplicateSessionModa
 import {COLLECTIONS} from "@/constants/collections.jsx";
 import {iconsNames} from "@/ui/components/CardGroups/consts.jsx";
 import SessionLabels from "../SessionLabels/SessionLabels.jsx";
+import { SessionDocuments } from "../SessionDocuments/SessionDocuments.jsx";
 import './SessionDetailsPage.scss';
 
 const SessionDetailsPage = () => {
@@ -57,6 +58,14 @@ const SessionDetailsPage = () => {
             render: () => (
                 <Tab.Pane>
                     <AddModelSession session={session} getModelSessions={getModelSessions} sessionId={sessionId} history={history}/>
+                </Tab.Pane>
+            ),
+        },
+        {
+            menuItem: "מסמכים",
+            render: () => (
+                <Tab.Pane>
+                    <SessionDocuments sessionId={sessionId} updateSession={setSession}/>
                 </Tab.Pane>
             ),
         },
