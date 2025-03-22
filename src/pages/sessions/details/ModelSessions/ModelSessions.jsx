@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import dayjs from "dayjs";
 import saveAs from "file-saver";
 import JSZip from "jszip";
@@ -34,30 +34,70 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
   const [toggleModelCity, setToggleModelCity] = useState(false);
   const [showModalForm, setShowModalForm] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [detailsCounter, setDetailsCounter] = useState(
-    calcModelSessionDetails(
-      modelSessions.filter((modelSession) => !modelSession.hasFine),
-    ),
-  );
+  const [sortType, setSortType] = useState("name");
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [sortedModelSessions, setSortedModelSessions] = useState([]);
   const [requestedModelSession, setRequestedModelSession] = useState(null);
 
   const { selectedRows, handleSelectRow, selectAllCheckboxProps } =
     useSelectTableRows({ rows: modelSessions });
 
-  const onlyActiveModelSessions = modelSessions.filter(
-    (modelSession) => !modelSession.hasFine,
+  const modelSessionsWithoutFines = useMemo(() => 
+    sortedModelSessions.filter(
+      (modelSession) => !modelSession.hasFine,
+    ),
+    [sortedModelSessions]
   );
 
-  const filteredModelSessions = modelSessions.filter(
-    (modelSession) =>
-      modelSession.model.name.toLowerCase().includes(searchValue.toLowerCase()), // Filtering logic
+  const modelSessionsMatchingSearch = useMemo(() =>
+    sortedModelSessions.filter(
+      (modelSession) =>
+        modelSession.model.name.toLowerCase().includes(searchValue.toLowerCase()),
+    ),
+    [sortedModelSessions, searchValue]
   );
+
+  useEffect(() => {
+    if (!modelSessions.length) {
+      setSortedModelSessions([]);
+      return;
+    }
+
+    const sortModelSessions = [...modelSessions];
+    
+    const sortFunction = (a, b) => {
+      let comparison = 0;
+      
+      switch (sortType) {
+        case "name":
+          comparison = a.model.name.localeCompare(b.model.name);
+          break;
+        case "note":
+          const noteA = a.note || "";
+          const noteB = b.note || "";
+          comparison = noteA.localeCompare(noteB);
+          break;
+        default:
+          comparison = a.model.name.localeCompare(b.model.name);
+          break;
+      }
+      
+      return sortDirection === "asc" ? comparison : -comparison;
+    };
+    
+    sortModelSessions.sort(sortFunction);
+    setSortedModelSessions(sortModelSessions);
+  }, [modelSessions, sortType, sortDirection]);
+
+  useEffect(() => {
+    setSortedModelSessions(modelSessions);
+  }, [modelSessions]);
 
   const { exportToExcel, isExporting } = useExportExcel({
     session: session,
     showModelId: toggleModelId,
     showModelCity: toggleModelCity,
-    data: onlyActiveModelSessions,
+    data: modelSessionsWithoutFines,
   });
 
   const sessionTitle = `${session.production} ${dayjs(session.date).format("DD/MM/YYYY")}`;
@@ -66,14 +106,10 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
     setShowModalForm(true);
   };
 
-  useEffect(() => {
-    // Be Aware of that modelSessions with fine are not calculated!
-    setDetailsCounter(
-      calcModelSessionDetails(
-        modelSessions.filter((modelSession) => !modelSession.hasFine),
-      ),
-    );
-  }, [modelSessions]);
+  const detailsCounter = useMemo(() => 
+    calcModelSessionDetails(modelSessionsWithoutFines),
+    [modelSessionsWithoutFines]
+  );
 
   const handleSearchChange = (e) => setSearchValue(e.target.value);
 
@@ -147,6 +183,20 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
     }
   };
 
+  const handleSortChange = (newSortType) => {
+    if (newSortType === sortType) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      setSortType(newSortType);
+      setSortDirection("asc");
+    }
+  };
+  
+  const getSortDirectionIcon = (type) => {
+    if (type !== sortType) return null;
+    return sortDirection === "asc" ? "arrow alternate circle up outline" : "arrow alternate circle down outline";
+  };
+
   return (
     <>
       <Segment
@@ -156,17 +206,17 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
       >
         <Header className="noprint">
           <Message
-            positive={!!onlyActiveModelSessions.length}
-            negative={!!onlyActiveModelSessions.length === 0}
+            positive={!!modelSessionsWithoutFines.length}
+            negative={!!modelSessionsWithoutFines.length === 0}
           >
-            {`${onlyActiveModelSessions.length} משתתפים ביום צילום זה:`}
+            {`${modelSessionsWithoutFines.length} משתתפים ביום צילום זה:`}
           </Message>
         </Header>
         <h1 className="only_print">{sessionTitle}</h1>
 
         <Menu attached="top">
           <Dropdown
-            pointing="right"
+            pointing="down"
             disabled={loading}
             loading={loading}
             text="תפריט"
@@ -181,7 +231,7 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
                 onClick={() => window.print()}
               />
               <ExportToWord
-                data={onlyActiveModelSessions}
+                data={modelSessionsWithoutFines}
                 sessionTitle={sessionTitle}
                 detailsCounter={Object.fromEntries(
                   Object.entries(detailsCounter),
@@ -199,6 +249,33 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
                 text="ייצא תמונות"
                 icon="images"
                 onClick={downloadImages}
+              />
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Dropdown 
+            text="מיון לפי"
+            pointing="down"
+            labeled
+            button
+            disabled={loading}
+            loading={loading}
+            className="icon noprint"
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item 
+                text="שם" 
+                active={sortType === "name"}
+                onClick={() => handleSortChange("name")}
+                icon={getSortDirectionIcon("name")}
+                style={{ alignItems: 'center', justifyContent: 'center' }}
+              />
+              <Dropdown.Item 
+                text="הערות" 
+                active={sortType === "note"}
+                onClick={() => handleSortChange("note")}
+                icon={getSortDirectionIcon("note")}
+                style={{ alignItems: 'center', justifyContent: 'center' }}
               />
             </Dropdown.Menu>
           </Dropdown>
@@ -263,7 +340,7 @@ const ModelSessions = ({ session, modelSessions, getModelSessions }) => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {filteredModelSessions.map((modelSession, index) => {
+            {modelSessionsMatchingSearch.map((modelSession, index) => {
               return (
                 <ModelSession
                   key={index}
